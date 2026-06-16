@@ -47,12 +47,12 @@ ${text(23, 'I tuoi 2 punti di forza più grandi')}
 ${text(24, 'Esperienza, idee o perché vuoi farne parte')}
 </form>`;
 
-const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero a queste 24 domande: servono a darti il ruolo più adatto a te. 3 minuti.</p>
+const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero a queste 24 domande: servono a darti il ruolo più adatto a te. 3 minuti.<br><b style="color:#15e37c">Alla fine premi "Copia le risposte" e incollale nel gruppo ReadBall.</b></p>
 <div class="id"><input id="nome" placeholder="Il tuo nome" autocomplete="off"></div>`;
 
-const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📨 Invia nel gruppo Telegram</button></div>
+const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📋 Copia le risposte</button></div>
 <script>
-document.getElementById('send').onclick=function(){
+document.getElementById('send').onclick=async function(){
   var nome=document.getElementById('nome').value.trim();
   var cards=[...document.querySelectorAll('.card')];
   var lines=[], ok=!!nome;
@@ -64,7 +64,11 @@ document.getElementById('send').onclick=function(){
   }
   if(!ok){var e=document.getElementById('err');e.style.display='block';window.scrollTo(0,0);return;}
   var msg='📋 CANDIDATURA Squadra ReadBall\\n👤 '+nome+'\\n\\n'+lines.join('\\n');
-  window.location.href='https://t.me/share/url?url=&text='+encodeURIComponent(msg);
+  function done(){alert('✅ Risposte COPIATE!\\n\\nOra apri il gruppo ReadBall su Telegram, tieni premuto sulla barra del messaggio e fai INCOLLA, poi invia. Fatto!');}
+  try{ await navigator.clipboard.writeText(msg); done(); }
+  catch(e){ var ta=document.createElement('textarea'); ta.value=msg; ta.style.position='fixed'; ta.style.top='0'; document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(_){ window.prompt('Copia questo testo e incollalo nel gruppo ReadBall:', msg); }
+    ta.remove(); }
 };
 </script></body></html>`;
 
