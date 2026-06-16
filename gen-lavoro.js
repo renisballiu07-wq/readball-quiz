@@ -1,5 +1,6 @@
-// gen-lavoro.js — costruisce lavoro.html (questionario 25 domande "Squadra ReadBall")
-// riusando head/style/logo di index.html. Raccolta risposte via WhatsApp (come il quiz partite).
+// gen-lavoro.js — costruisce lavoro.html (questionario "Squadra ReadBall", 8 ruoli)
+// riusa head/style/logo di index.html. INVIO: Telegram (share) -> il candidato lo manda nel GRUPPO,
+// dove il bot lo salva in automatico (chatlog).
 const fs = require('fs');
 const idx = fs.readFileSync('index.html', 'utf8');
 const cut = idx.indexOf('</h1></div>') + '</h1></div>'.length;
@@ -15,40 +16,41 @@ const text = (n, q) => `<div class="card" data-q="${n}. ${q.replace(/"/g, '&quot
 const form = `<form id="f">
 ${sec('⏰ DISPONIBILITÀ')}
 ${radio(1, 'Quante ore AL GIORNO puoi dedicarci?', ['Meno di 1h', '1–2h', '2–4h', 'Più di 4h'])}
-${radio(2, 'Quanti giorni a settimana?', ['1–2', '3–4', '5–6', 'Tutti i giorni'])}
-${check(3, 'In che fasce orarie rendi meglio?', ['Mattina', 'Pomeriggio', 'Sera', 'Notte'], 2)}
-${radio(4, 'Riesci a rispettare scadenze precise (es. "post pronto entro le 18")?', ['Sempre', 'Quasi sempre', 'Dipende', 'Faccio fatica'])}
-${radio(5, 'Per quanto pensi di tenere questo impegno?', ['Provo e vedo', 'Qualche mese', 'A lungo', 'Tutto il Mondiale e oltre'])}
-${sec('💻 DISPOSITIVI & STRUMENTI')}
-${radio(6, 'Che computer hai?', ['PC Windows', 'Mac', 'Portatile base', 'Non ho un PC'])}
-${radio(7, 'Che smartphone hai?', ['iPhone recente', 'iPhone vecchio', 'Android top', 'Android base'])}
-${check(8, 'Cosa hai per fare/montare video?', ['Buona fotocamera del telefono', 'Microfono decente', 'Luci / ring light', 'Niente di particolare'])}
-${check(9, 'Quali AI/abbonamenti hai?', ['ChatGPT Plus', 'Gemini Pro', 'Canva Pro', 'CapCut Pro', 'Nessuno'])}
-${radio(10, 'Sai usare app di montaggio video?', ['CapCut bene', 'Premiere / DaVinci', 'Solo le basi', 'No'])}
-${radio(11, 'Sai usare strumenti grafici (Canva/Photoshop)?', ['Ottimo', 'Discreto', 'Le basi', 'No'])}
-${sec('🛠️ LE TUE COMPETENZE', 'Sii sincero: serve a darti il ruolo giusto, non a giudicarti.')}
-${radio(12, 'Scrittura / caption che catturano', ['Punto di forza', 'Discreto', 'Scarso'])}
-${radio(13, 'Grafica / senso estetico', ['Punto di forza', 'Discreto', 'Scarso'])}
-${radio(14, 'Montaggio video', ['Punto di forza', 'Discreto', 'Scarso'])}
-${radio(15, 'Trovare storie/curiosità/dati interessanti', ['Punto di forza', 'Discreto', 'Scarso'])}
-${radio(16, 'Stare DAVANTI alla camera / parlare in video', ['A mio agio', 'Così così', 'No grazie'])}
-${radio(17, 'Faresti la VOCE per i video (voice-over)?', ['Sì volentieri', 'Si può provare', 'No'])}
-${radio(18, 'Quanto conosci il calcio?', ['Espertissimo', 'Buona', 'Media', 'Scarsa'])}
-${text(19, 'Inglese / altre lingue (quali e che livello?)')}
-${radio(20, 'Conosci come "funzionano" TikTok/IG/Telegram (trend, orari, hashtag)?', ['Molto bene', 'Abbastanza', 'Poco'])}
-${sec('🎯 COSA TI PIACEREBBE FARE')}
-${radio(21, 'Quale piattaforma ti attira di più?', ['Instagram', 'TikTok', 'Telegram', 'Mi è uguale'])}
-${check(22, 'Che ruolo ti piacerebbe avere?', ['Creare video', 'Fare grafiche', 'Scrivere le caption', 'Cercare contenuti & curiosità', 'Pubblicare e gestire i social', 'Gestire la community Telegram', 'Analisi partite / giocate', 'Stare in video (volto della pagina)'], 2)}
-${radio(23, 'Come preferisci lavorare?', ['Da solo, coi miei tempi', 'In coppia', 'Coordinando altri'])}
-${sec('🔥 TU')}
-${text(24, 'I tuoi 2 punti di forza più grandi')}
-${text(25, 'Hai esperienza (social/montaggio/grafica) o idee per la pagina? Raccontala')}
+${radio(2, 'Quanti giorni a settimana?', ['1–2', '3–4', '5–6', 'Tutti'])}
+${radio(3, 'Rispetti le scadenze (es. "pronto entro le 18")?', ['Sempre', 'Quasi sempre', 'Dipende', 'Faccio fatica'])}
+${radio(4, 'Per quanto pensi di continuare?', ['Provo e vedo', 'Qualche mese', 'A lungo', 'Tutto il Mondiale e oltre'])}
+${sec('⚽ QUANTO VIVI IL CALCIO')}
+${radio(5, 'Come guardi le partite?', ['Intere e con attenzione', 'Intere ma distratto', 'Solo gol/highlights', 'Quasi mai'])}
+${radio(6, 'Quante partite a settimana guardi davvero?', ['0–1', '2–3', '4–6', '7 o più'])}
+${radio(7, 'Durante la partita noti i dettagli (chi è stanco, cali, mosse tattiche)?', ['Sì, sempre', 'A volte', 'No'])}
+${text(8, 'Di quali nazionali/squadre/campionati sei ESPERTO VERO? (anche calci "di nicchia")')}
+${radio(9, 'Quanto sei bravo a pronosticare i risultati?', ['Molto', 'Nella media', 'Scarso'])}
+${sec('🎯 GIOCATE & SCOMMESSE')}
+${radio(10, 'Hai un conto scommesse?', ['Sì, attivo', 'Sì ma lo uso poco', 'No, ma lo aprirei', 'No e non mi interessa'])}
+${radio(11, 'Seguiresti le giocate ReadBall con PICCOLI soldi veri, documentando come va?', ['Sì, ci sto', 'Forse', 'No'])}
+${radio(12, 'Quanto te ne intendi di quote e mercati (Over, Goal, handicap...)?', ['Bene', 'Le basi', 'Poco'])}
+${sec('📱 SOCIAL & RETE')}
+${radio(13, 'Quale piattaforma mastichi di più?', ['Instagram', 'TikTok', 'Telegram', 'Poco social'])}
+${radio(14, 'Quanto conosci trend, hashtag e orari giusti per postare?', ['Molto', 'Abbastanza', 'Poco'])}
+${radio(15, 'Te la cavi a scrivere a sconosciuti/altre pagine per collaborazioni?', ['Sì, tranquillo', 'Con qualche sforzo', 'No, mi blocco'])}
+${radio(16, 'Quanto è grande la tua cerchia social (potresti far girare i contenuti)?', ['Grande', 'Media', 'Piccola'])}
+${text(17, 'Conosci gente o pagine nel mondo calcio-social? (chi/quali, se sì)')}
+${sec('🎥 VIDEO & FACCIA')}
+${radio(18, 'Ti metteresti DAVANTI alla camera nei video?', ['Sì, a mio agio', 'Si può provare', 'No'])}
+${radio(19, 'Faresti la VOCE nei video (voice-over)?', ['Sì', 'Forse', 'No'])}
+${sec('🛠️ STRUMENTI')}
+${check(20, 'Cosa hai a disposizione?', ['PC / Mac', 'Telefono buono per video', 'Microfono / luci', 'Niente di che'])}
+${check(21, 'Quali AI/abbonamenti hai?', ['ChatGPT Plus', 'Gemini Pro', 'Canva Pro', 'CapCut Pro', 'Nessuno'])}
+${sec('💪 TU & IL RUOLO', 'Quasi finito.')}
+${radio(22, 'Quale RUOLO ti attira di più?', ['Gestire un canale (IG/TikTok/Telegram)', 'Guardare le partite e prendere appunti', 'Seguire le giocate coi tuoi soldi e documentarlo', 'Dare i tuoi pronostici (amici vs motore)', 'Contattare pagine per collab', 'Essere esperto di un calcio di nicchia', 'Stare nei video (faccia/voce)'])}
+${text(23, 'I tuoi 2 punti di forza più grandi')}
+${text(24, 'Esperienza, idee o perché vuoi farne parte')}
 </form>`;
 
-const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero a queste 25 domande: servono a darti il ruolo più adatto a te. Ci vogliono 3 minuti.</p>
+const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero a queste 24 domande: servono a darti il ruolo più adatto a te. 3 minuti.</p>
 <div class="id"><input id="nome" placeholder="Il tuo nome" autocomplete="off"></div>`;
 
-const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📲 Invia la candidatura</button></div>
+const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📨 Invia nel gruppo Telegram</button></div>
 <script>
 document.getElementById('send').onclick=function(){
   var nome=document.getElementById('nome').value.trim();
@@ -62,7 +64,7 @@ document.getElementById('send').onclick=function(){
   }
   if(!ok){var e=document.getElementById('err');e.style.display='block';window.scrollTo(0,0);return;}
   var msg='📋 CANDIDATURA Squadra ReadBall\\n👤 '+nome+'\\n\\n'+lines.join('\\n');
-  window.location.href='https://wa.me/?text='+encodeURIComponent(msg);
+  window.location.href='https://t.me/share/url?url=&text='+encodeURIComponent(msg);
 };
 </script></body></html>`;
 
