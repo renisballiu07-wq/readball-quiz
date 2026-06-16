@@ -61,14 +61,18 @@ ${sec('💪 TU & IL RUOLO', 'Ultime domande.')}
 ${check(38, 'Quali RUOLI ti attirano di più?', ['Gestire un canale (IG/TikTok/Telegram)', 'Guardare le partite e prendere appunti', 'Seguire le giocate coi tuoi soldi e documentarlo', 'Dare i tuoi pronostici (amici vs motore)', 'Contattare pagine per collab', 'Essere esperto di un calcio di nicchia'], 3)}
 ${text(39, 'I tuoi 2 punti di forza più grandi')}
 ${text(40, 'Perché vuoi farne parte DAVVERO?')}
+${sec('🎟️ LE TUE GIOCATE', 'Ultime 3 partite del Mondiale.')}
+${radio(41, 'Nelle ultime 3 partite del Mondiale hai fatto schedine/giocate?', ['Sì, parecchie', 'Sì, qualcuna', 'No'])}
+${radio(42, 'Ne hai fatte seguendo i pronostici di ReadBall?', ['Sì', 'No', 'Non sapevo si potesse'])}
+${text(43, 'Raccontami una giocata che hai VINTO e perché hai scelto quelle giocate (e mandami lo screenshot su WhatsApp, se ti va)')}
 </form>`;
 
-const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero e per esteso: non è un test, serve a capire chi sei e a darti il ruolo giusto. Più ci metti del tuo, più conti.<br><b style="color:#15e37c">Alla fine premi "Copia le risposte" e incollale nel gruppo ReadBall.</b></p>
+const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero e per esteso: non è un test, serve a capire chi sei e a darti il ruolo giusto. Più ci metti del tuo, più conti.<br><b style="color:#15e37c">Alla fine premi "Invia" e mandami tutto su WhatsApp. Le schedine vinte mandamele come screenshot.</b></p>
 <div class="id"><input id="nome" placeholder="Il tuo nome" autocomplete="off"></div>`;
 
-const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📋 Copia le risposte</button></div>
+const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📲 Invia a Renis (WhatsApp)</button></div>
 <script>
-document.getElementById('send').onclick=async function(){
+document.getElementById('send').onclick=function(){
   var nome=document.getElementById('nome').value.trim();
   var cards=[...document.querySelectorAll('.card')];
   var lines=[], ok=!!nome;
@@ -79,12 +83,8 @@ document.getElementById('send').onclick=async function(){
     else{var tx=c.querySelector('input[type=text]').value.trim();lines.push(q+' -> '+(tx||'-'));}
   }
   if(!ok){var e=document.getElementById('err');e.style.display='block';window.scrollTo(0,0);return;}
-  var msg='📋 CANDIDATURA Squadra ReadBall\\n👤 '+nome+'\\n\\n'+lines.join('\\n');
-  function done(){alert('✅ Risposte COPIATE!\\n\\nOra apri il gruppo ReadBall su Telegram, tieni premuto sulla barra del messaggio e fai INCOLLA, poi invia. Fatto!');}
-  try{ await navigator.clipboard.writeText(msg); done(); }
-  catch(e){ var ta=document.createElement('textarea'); ta.value=msg; ta.style.position='fixed'; ta.style.top='0'; document.body.appendChild(ta); ta.focus(); ta.select();
-    try{ document.execCommand('copy'); done(); }catch(_){ window.prompt('Copia questo testo e incollalo nel gruppo ReadBall:', msg); }
-    ta.remove(); }
+  var msg='📋 CANDIDATURA Squadra ReadBall\\n👤 '+nome+'\\n\\n'+lines.join('\\n')+'\\n\\n(Le schedine vinte le mando come screenshot.)';
+  window.location.href='https://wa.me/?text='+encodeURIComponent(msg);
 };
 </script></body></html>`;
 
