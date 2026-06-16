@@ -1,6 +1,5 @@
-// gen-lavoro.js — costruisce lavoro.html (questionario "Squadra ReadBall", 8 ruoli)
-// riusa head/style/logo di index.html. INVIO: Telegram (share) -> il candidato lo manda nel GRUPPO,
-// dove il bot lo salva in automatico (chatlog).
+// gen-lavoro.js — questionario "Squadra ReadBall" COMPLETO (8 ruoli + visione/ambizione/soldi/lacune).
+// Riusa head/style/logo di index.html. Submit: copia negli appunti -> incolla nel gruppo ReadBall.
 const fs = require('fs');
 const idx = fs.readFileSync('index.html', 'utf8');
 const cut = idx.indexOf('</h1></div>') + '</h1></div>'.length;
@@ -23,7 +22,7 @@ ${sec('⚽ QUANTO VIVI IL CALCIO')}
 ${radio(5, 'Come guardi le partite?', ['Intere e con attenzione', 'Intere ma distratto', 'Solo gol/highlights', 'Quasi mai'])}
 ${radio(6, 'Quante partite a settimana guardi davvero?', ['0–1', '2–3', '4–6', '7 o più'])}
 ${radio(7, 'Durante la partita noti i dettagli (chi è stanco, cali, mosse tattiche)?', ['Sì, sempre', 'A volte', 'No'])}
-${text(8, 'Di quali nazionali/squadre/campionati sei ESPERTO VERO? (anche calci "di nicchia")')}
+${text(8, 'Di quali nazionali/squadre/campionati sei ESPERTO VERO? (anche calci di nicchia)')}
 ${radio(9, 'Quanto sei bravo a pronosticare i risultati?', ['Molto', 'Nella media', 'Scarso'])}
 ${sec('🎯 GIOCATE & SCOMMESSE')}
 ${radio(10, 'Hai un conto scommesse?', ['Sì, attivo', 'Sì ma lo uso poco', 'No, ma lo aprirei', 'No e non mi interessa'])}
@@ -38,16 +37,27 @@ ${text(17, 'Conosci gente o pagine nel mondo calcio-social? (chi/quali, se sì)'
 ${sec('🎥 VIDEO & FACCIA')}
 ${radio(18, 'Ti metteresti DAVANTI alla camera nei video?', ['Sì, a mio agio', 'Si può provare', 'No'])}
 ${radio(19, 'Faresti la VOCE nei video (voice-over)?', ['Sì', 'Forse', 'No'])}
-${sec('🛠️ STRUMENTI')}
-${check(20, 'Cosa hai a disposizione?', ['PC / Mac', 'Telefono buono per video', 'Microfono / luci', 'Niente di che'])}
+${sec('🛠️ STRUMENTI & MEZZI')}
+${check(20, 'Che dispositivi hai?', ['PC / Mac', 'iPad / Tablet', 'Telefono buono per video', 'Microfono / luci', 'Niente di che'])}
 ${check(21, 'Quali AI/abbonamenti hai?', ['ChatGPT Plus', 'Gemini Pro', 'Canva Pro', 'CapCut Pro', 'Nessuno'])}
-${sec('💪 TU & IL RUOLO', 'Quasi finito.')}
-${check(22, 'Quali RUOLI ti attirano di più?', ['Gestire un canale (IG/TikTok/Telegram)', 'Guardare le partite e prendere appunti', 'Seguire le giocate coi tuoi soldi e documentarlo', 'Dare i tuoi pronostici (amici vs motore)', 'Contattare pagine per collab', 'Essere esperto di un calcio di nicchia', 'Stare nei video (faccia/voce)'], 3)}
-${text(23, 'I tuoi 2 punti di forza più grandi')}
-${text(24, 'Esperienza, idee o perché vuoi farne parte')}
+${radio(22, 'Hai un abbonamento per vedere le partite (DAZN, Sky...)?', ['Sì, ce l’ho già', 'No ma posso procurarmelo', 'No, mi servirebbe che lo offrite voi', 'Non mi serve per il mio ruolo'])}
+${sec('🚀 VISIONE & AMBIZIONE', 'La parte che conta di più. Pensaci e rispondi per esteso.')}
+${text(23, 'Cosa ASPIRI a diventare dentro ReadBall? Dove ti vedi tra un anno?')}
+${text(24, 'Cosa credi che ReadBall possa diventare? Quanto in grande lo vedi?')}
+${radio(25, 'Saresti disposto a INVESTIRE soldi tuoi nel progetto?', ['Sì', 'Forse, dipende', 'No'])}
+${text(26, 'Se sì o forse: quanto e soprattutto PERCHÉ?')}
+${text(27, 'Quali sono secondo te i PUNTI DEBOLI / le lacune di ReadBall oggi?')}
+${text(28, 'Come le MIGLIORERESTI? (concreto)')}
+${text(29, 'Cosa AGGIUNGERESTI a ReadBall (funzioni, contenuti, idee nuove)?')}
+${text(30, 'Una modifica che faresti SUBITO al mondo ReadBall?')}
+${radio(31, 'Quanto ci credi in questo progetto?', ['Tantissimo, ci metto tutto', 'Molto', 'Abbastanza', 'Sto a guardare'])}
+${sec('💪 TU & IL RUOLO', 'Ultime domande.')}
+${check(32, 'Quali RUOLI ti attirano di più?', ['Gestire un canale (IG/TikTok/Telegram)', 'Guardare le partite e prendere appunti', 'Seguire le giocate coi tuoi soldi e documentarlo', 'Dare i tuoi pronostici (amici vs motore)', 'Contattare pagine per collab', 'Essere esperto di un calcio di nicchia', 'Stare nei video (faccia/voce)'], 3)}
+${text(33, 'I tuoi 2 punti di forza più grandi')}
+${text(34, 'Perché vuoi farne parte DAVVERO?')}
 </form>`;
 
-const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero a queste 24 domande: servono a darti il ruolo più adatto a te. 3 minuti.<br><b style="color:#15e37c">Alla fine premi "Copia le risposte" e incollale nel gruppo ReadBall.</b></p>
+const intro = `<p class="intro">Vuoi entrare nella squadra <b style="color:#15e37c">ReadBall</b> (Instagram, TikTok, Telegram)? Rispondi sincero e per esteso: non è un test, serve a capire chi sei e a darti il ruolo giusto. Più ci metti del tuo, più conti.<br><b style="color:#15e37c">Alla fine premi "Copia le risposte" e incollale nel gruppo ReadBall.</b></p>
 <div class="id"><input id="nome" placeholder="Il tuo nome" autocomplete="off"></div>`;
 
 const script = `<div class="bar"><div class="err" id="err">Scrivi il tuo nome e completa le domande a scelta 👆</div><button id="send">📋 Copia le risposte</button></div>
