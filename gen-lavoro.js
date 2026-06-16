@@ -42,7 +42,7 @@ ${sec('🛠️ STRUMENTI')}
 ${check(20, 'Cosa hai a disposizione?', ['PC / Mac', 'Telefono buono per video', 'Microfono / luci', 'Niente di che'])}
 ${check(21, 'Quali AI/abbonamenti hai?', ['ChatGPT Plus', 'Gemini Pro', 'Canva Pro', 'CapCut Pro', 'Nessuno'])}
 ${sec('💪 TU & IL RUOLO', 'Quasi finito.')}
-${radio(22, 'Quale RUOLO ti attira di più?', ['Gestire un canale (IG/TikTok/Telegram)', 'Guardare le partite e prendere appunti', 'Seguire le giocate coi tuoi soldi e documentarlo', 'Dare i tuoi pronostici (amici vs motore)', 'Contattare pagine per collab', 'Essere esperto di un calcio di nicchia', 'Stare nei video (faccia/voce)'])}
+${check(22, 'Quali RUOLI ti attirano di più?', ['Gestire un canale (IG/TikTok/Telegram)', 'Guardare le partite e prendere appunti', 'Seguire le giocate coi tuoi soldi e documentarlo', 'Dare i tuoi pronostici (amici vs motore)', 'Contattare pagine per collab', 'Essere esperto di un calcio di nicchia', 'Stare nei video (faccia/voce)'], 3)}
 ${text(23, 'I tuoi 2 punti di forza più grandi')}
 ${text(24, 'Esperienza, idee o perché vuoi farne parte')}
 </form>`;
