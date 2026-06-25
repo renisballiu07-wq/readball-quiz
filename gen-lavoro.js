@@ -77,7 +77,7 @@ ${radio(46, 'Quanto ci credi in questo progetto?', ['Tantissimo, ci metto tutto'
 
 ${sec('💪 TU & IL RUOLO', 'Ci siamo: dimmi dove ti vedi.')}
 ${text(47, '⭐ SPAZIO LIBERO: cosa ti piacerebbe DAVVERO fare come lavoro per ReadBall? Come ti immagini di contribuire? Scrivi tutto quello che ti viene.')}
-${check(48, 'Quali RUOLI ti attirano di più?', ['Guardare le partite live e prendere appunti (Match Watcher)', 'Seguire le giocate coi tuoi soldi e documentarlo (Tester)', 'Gestire i canali social coi tool AI (Contenuti)', 'Contattare pagine/sponsor per collaborazioni (Outreach)', 'Dare i tuoi pronostici di pancia (Comitato)', 'Essere esperto di un calcio di nicchia (Scout)', 'Coordinare il team / braccio destro del capo'], 3)}
+${text(48, 'Se dovessi scegliere TU il tuo compito nella squadra, quale sarebbe? E perché pensi di essere la persona giusta per quello?')}
 ${text(49, 'I tuoi 2-3 PUNTI DI FORZA più grandi (perché dovremmo contare su di te)')}
 ${text(50, 'Perché vuoi farne parte DAVVERO? Cosa ti spinge?')}
 </form>`;
