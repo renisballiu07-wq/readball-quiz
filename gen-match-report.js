@@ -14,48 +14,37 @@ const text = (n, q) => `<div class="card" data-q="${n}. ${q.replace(/"/g, '&quot
 const CASA_OSPITE_PARI = ['Squadra di CASA', 'Squadra OSPITE', 'Pari / nessuna'];
 
 const form = `<form id="f">
-${sec('⚡ CONDIZIONE FISICA')}
+${sec('⚡ CONDIZIONE FISICA', 'Quello che le statistiche non vedono.')}
 ${radio(1, 'Quale squadra è arrivata più in forma fisicamente?', CASA_OSPITE_PARI)}
 ${radio(2, 'Cali fisici evidenti nel finale?', ['Sì, la CASA', 'Sì, l’OSPITE', 'Entrambe', 'No'])}
 ${text(3, 'Giocatori palesemente STANCHI o scarichi (nomi)')}
-${text(4, 'Chi correva ancora a fine gara / pozzo senza fondo (nomi)')}
-${sec('🎯 TATTICA & ALLENATORI')}
-${radio(5, 'Chi ha DOMINATO il gioco?', CASA_OSPITE_PARI)}
-${text(6, 'Modulo reale visto in campo (se diverso dal previsto, quale?)')}
-${radio(7, 'Cambi tattici che hanno cambiato la partita?', ['Sì, decisivi', 'Qualcuno', 'No'])}
-${text(8, 'Se sì, quali cambi/mosse hanno spostato la gara')}
-${radio(9, 'Quale allenatore ha letto meglio la partita?', ['Quello di CASA', 'Quello OSPITE', 'Pari'])}
-${check(10, 'Come faceva male la squadra più pericolosa?', ['Sulle fasce', 'Per centro', 'Palle inattive', 'Ripartenze', 'Tiri da fuori', 'Pressing alto'])}
+${text(4, 'Chi correva ancora a fine gara / non si fermava mai (nomi)')}
+${sec('🎯 LA LETTURA TATTICA')}
+${radio(5, 'Quale allenatore ha letto meglio la partita?', ['Quello di CASA', 'Quello OSPITE', 'Pari'])}
+${text(6, 'Cambi o mosse che hanno SPOSTATO la gara (quali e perché)')}
+${check(7, 'Come faceva male la squadra più pericolosa?', ['Sulle fasce', 'Per centro', 'Palle inattive', 'Ripartenze', 'Tiri da fuori', 'Pressing alto'])}
 ${sec('📈 ANDAMENTO & INERZIA')}
-${radio(11, 'Che tipo di partita è stata?', ['Aperta e da gol', 'Tattica e bloccata', 'Squilibrata (una dominava)', 'Nervosa e spezzettata'])}
-${text(12, 'Il momento in cui è cambiata la partita (minuto / episodio)')}
-${radio(13, 'Chi ha avuto più occasioni VERE?', CASA_OSPITE_PARI)}
-${radio(14, 'Il risultato rispecchia ciò che si è visto?', ['Sì, giusto', 'La CASA meritava di più', 'L’OSPITE meritava di più', 'Risultato bugiardo'])}
-${sec('👤 I SINGOLI')}
-${text(15, 'Migliore in campo (nome)')}
-${text(16, 'Peggiore / più deludente (nome)')}
-${text(17, 'Una rivelazione o sorpresa (nome)')}
-${text(18, 'Un giocatore che può decidere le PROSSIME partite (nome)')}
-${text(19, 'Assenze che hanno pesato molto? (chi e di quale squadra)')}
-${sec('🧤 PORTIERI & DIFESE')}
-${radio(20, 'Il portiere ha inciso?', ['Parate decisive (CASA)', 'Parate decisive (OSPITE)', 'Errore/i di un portiere', 'Serata normale'])}
-${radio(21, 'Le difese?', ['Entrambe solide', 'CASA in difficoltà', 'OSPITE in difficoltà', 'Entrambe ballerine'])}
-${sec('🟨 DISCIPLINA & ARBITRO')}
-${radio(22, 'Quanto è stata nervosa?', ['Tranquilla', 'Normale', 'Molto nervosa'])}
-${text(23, 'Cartellini/espulsioni che hanno pesato? (chi, quando)')}
-${radio(24, 'L’arbitro ha influito?', ['No, gara pulita', 'Episodio a favore CASA', 'Episodio a favore OSPITE', 'Direzione confusa'])}
-${text(25, 'Rigori / episodi dubbi (descrivi)')}
-${sec('🔮 IL DATO CHE I NUMERI NON VEDONO', 'La parte più preziosa.')}
-${text(26, 'Occasioni clamorose divorate, pali, gol annullati (chi)')}
-${text(27, 'Una squadra ha sofferto o spinto MOLTO più di quanto dica il risultato? Quale e perché')}
-${text(28, 'Qualcosa di strano: atteggiamento, gestione, sensazione di gara non voluta o gestita?')}
+${radio(8, 'Che tipo di partita è stata?', ['Aperta e da gol', 'Tattica e bloccata', 'Squilibrata (una dominava)', 'Nervosa e spezzettata'])}
+${text(9, 'Il momento in cui è girata la partita (minuto / episodio)')}
+${radio(10, 'Il risultato rispecchia ciò che hai visto?', ['Sì, giusto', 'La CASA meritava di più', 'L’OSPITE meritava di più', 'Risultato bugiardo'])}
+${sec('👤 I SINGOLI', 'Il tuo occhio, non i voti dei siti.')}
+${text(11, 'Chi ti ha impressionato di più (nome e perché)')}
+${text(12, 'Chi ha deluso / è stato un buco (nome)')}
+${text(13, 'Una rivelazione o sorpresa (nome)')}
+${text(14, 'Un giocatore in fiducia che può decidere le PROSSIME (nome)')}
+${sec('🥊 I DUELLI', 'Oro per le prossime giocate.')}
+${text(15, 'Un duello chiaro: chi ha dominato chi (es. un difensore in crisi contro un attaccante in giornata)')}
+${sec('🔮 IL DATO CHE I NUMERI NON VEDONO', 'La parte più preziosa — qui sei insostituibile.')}
+${text(16, 'Chi ha buttato gol già fatti / occasioni clamorose divorate')}
+${text(17, 'Una squadra ha sofferto o spinto MOLTO più di quanto dica il risultato? Quale e perché')}
+${text(18, 'Qualcosa di strano: atteggiamento, gestione, una gara gestita o non voluta?')}
 ${sec('➡️ PER LE PROSSIME')}
-${text(29, 'Cosa ti aspetti dalla squadra di CASA nella prossima partita?')}
-${text(30, 'Cosa ti aspetti dall’OSPITE nella prossima partita?')}
-${text(31, 'Sensazione generale / note libere')}
+${text(19, 'Cosa ti aspetti dalla CASA nella prossima partita')}
+${text(20, 'Cosa ti aspetti dall’OSPITE nella prossima partita')}
+${text(21, 'Il tuo commento libero — dì quello che vuoi')}
 </form>`;
 
-const intro = `<p class="intro">Report da compilare <b style="color:#15e37c">subito dopo la partita</b>, finché ce l’hai in testa. Servono le cose che i dati NON vedono: condizione fisica, tattica, episodi, sensazioni. Più sei preciso, più il motore diventa forte.<br><b style="color:#15e37c">Alla fine premi "Copia" e incolla nel gruppo ReadBall.</b></p>
+const intro = `<p class="intro">Report da compilare <b style="color:#15e37c">subito dopo la partita</b>, finché ce l’hai in testa. Servono SOLO le cose che i dati NON vedono: condizione fisica, lettura tattica, duelli, sensazioni. Cartellini, tiri, parate e statistiche li abbiamo già dal motore — qui conta il tuo OCCHIO. Più sei preciso, più il motore diventa forte.<br><b style="color:#15e37c">Alla fine premi "Copia" e incolla nel gruppo ReadBall.</b></p>
 <div class="id">
 <input id="partita" placeholder="Partita (es. Germania-Curaçao)" autocomplete="off">
 <input id="risultato" placeholder="Risultato finale (es. 2-0)" autocomplete="off">
